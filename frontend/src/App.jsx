@@ -45,7 +45,7 @@ export default function App() {
     try {
       setObjectives(await fetchObjectives());
     } catch (err) {
-      pushToast(err.message || 'No se pudieron cargar los objetivos');
+      pushToast(err.message || 'Could not load objectives');
     } finally {
       setLoading(false);
     }
@@ -98,7 +98,7 @@ export default function App() {
             : o
         )
       );
-      pushToast('No se pudo guardar — revertido');
+      pushToast('Could not save — reverted');
     }
   }
 
@@ -116,7 +116,7 @@ export default function App() {
           o.id === objectiveId ? { ...o, obtained: !obtained } : o
         )
       );
-      pushToast('No se pudo guardar — revertido');
+      pushToast('Could not save — reverted');
     }
   }
 
@@ -127,13 +127,13 @@ export default function App() {
     try {
       await removeObjective(objectiveId);
       pushToast(
-        mode === 'completed' ? 'Marcado como completado' : 'Eliminado',
+        mode === 'completed' ? 'Marked as completed' : 'Deleted',
         mode === 'completed' ? 'success' : 'error'
       );
       setCompletedKey((k) => k + 1);
     } catch (err) {
       setObjectives(prev);
-      pushToast('No se pudo eliminar');
+      pushToast('Could not delete');
     }
   }
 
@@ -141,14 +141,14 @@ export default function App() {
     try {
       const updated = await refreshObjective(objectiveId);
       if (updated.parsingFailed) {
-        pushToast('La wiki no devolvió datos estructurados');
+        pushToast('The wiki returned no structured data');
         return;
       }
-      pushToast('Actualizado desde la wiki', 'success');
+      pushToast('Refreshed from the wiki', 'success');
       // Reload to recompute cross-refs.
       load();
     } catch (err) {
-      pushToast(err.message || 'No se pudo actualizar');
+      pushToast(err.message || 'Could not refresh');
     }
   }
 
@@ -186,7 +186,7 @@ export default function App() {
           onToast={pushToast}
         />
         <button className="catalog-open" onClick={() => setShowCatalog(true)}>
-          ▦ Explorar catálogo de Warframes y Armas
+          ▦ Browse Warframe & Weapon catalog
         </button>
         <FilterChips active={filter} onChange={setFilter} />
 
@@ -199,8 +199,8 @@ export default function App() {
         ) : filtered.length === 0 ? (
           <div className="empty">
             {objectives.length === 0
-              ? 'No hay objetivos. Busca un item para empezar.'
-              : 'Nada en este filtro.'}
+              ? 'No objectives yet. Search for an item to get started.'
+              : 'Nothing in this filter.'}
           </div>
         ) : (
           filtered.map((obj) => (
@@ -225,7 +225,7 @@ export default function App() {
       {/* Floating materials button */}
       <button
         className="fab"
-        aria-label="Materiales"
+        aria-label="Materials"
         onClick={() => setShowMaterials(true)}
       >
         ⊞

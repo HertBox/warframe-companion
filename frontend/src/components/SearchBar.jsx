@@ -35,7 +35,7 @@ export default function SearchBar({ existingPages = [], onAdd, onToast }) {
         const res = await searchItems(query);
         setResults(res);
       } catch (err) {
-        onToast?.(err.message || 'Búsqueda fallida', 'error');
+        onToast?.(err.message || 'Search failed', 'error');
         setResults([]);
       } finally {
         setLoading(false);
@@ -65,17 +65,17 @@ export default function SearchBar({ existingPages = [], onAdd, onToast }) {
     try {
       const created = await addObjective(result.wikiPage, result.title);
       if (created.parsingFailed) {
-        onToast?.('Sin datos estructurados — revisa la wiki', 'error');
+        onToast?.('No structured data — check the wiki', 'error');
       } else {
-        onToast?.(`${created.name} añadido`, 'success');
+        onToast?.(`${created.name} added`, 'success');
         onAdd?.(created);
         setQuery('');
         setResults([]);
         setOpen(false);
       }
     } catch (err) {
-      if (err.status === 409) onToast?.('Ya en tu lista', 'error');
-      else onToast?.(err.message || 'No se pudo añadir', 'error');
+      if (err.status === 409) onToast?.('Already in your list', 'error');
+      else onToast?.(err.message || 'Could not add', 'error');
     } finally {
       setAdding(null);
     }
@@ -85,7 +85,7 @@ export default function SearchBar({ existingPages = [], onAdd, onToast }) {
     <div className="search" ref={wrapRef}>
       <input
         className="search__input"
-        placeholder="Buscar item (ej. rhino prime, serration)…"
+        placeholder="Search an item (e.g. rhino prime, serration)…"
         value={query}
         onChange={(e) => setQuery(e.target.value)}
         onFocus={() => query.trim() && setOpen(true)}
@@ -93,10 +93,10 @@ export default function SearchBar({ existingPages = [], onAdd, onToast }) {
 
       {open && (
         <div className="search__dropdown">
-          {loading && <div className="search__hint">Buscando…</div>}
+          {loading && <div className="search__hint">Searching…</div>}
 
           {!loading && results.length === 0 && (
-            <div className="search__hint">Sin resultados</div>
+            <div className="search__hint">No results</div>
           )}
 
           {!loading &&
@@ -120,9 +120,9 @@ export default function SearchBar({ existingPages = [], onAdd, onToast }) {
                     )}
                   </span>
                   {isDup ? (
-                    <span className="badge badge--mod">Ya en tu lista</span>
+                    <span className="badge badge--mod">In your list</span>
                   ) : adding === r.wikiPage ? (
-                    <span className="badge badge--mod">Añadiendo…</span>
+                    <span className="badge badge--mod">Adding…</span>
                   ) : meta ? (
                     <span className={`badge badge--${meta.badge}`}>{meta.label}</span>
                   ) : null}

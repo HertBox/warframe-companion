@@ -21,10 +21,10 @@ const FARM_LOCATIONS = {
   Oxium: 'Corpus maps (Oxium Ospreys)',
   Gallium: 'Mars, Ceres, Uranus (bosses)',
   Tellurium: 'Uranus/Sedna - Archwing, Empyrean',
-  Cryotic: 'Misiones de Excavación',
-  'Detonite Injector': 'Invasiones / Foundry',
-  Fieldron: 'Invasiones / Foundry',
-  'Mutagen Mass': 'Invasiones / Foundry',
+  Cryotic: 'Excavation missions',
+  'Detonite Injector': 'Invasions / Foundry',
+  Fieldron: 'Invasions / Foundry',
+  'Mutagen Mass': 'Invasions / Foundry',
 };
 
 // Multi-word resources first so longer names match before shorter substrings.
@@ -48,12 +48,12 @@ const BOSS_NODES = {
   'Sargas Ruk': 'Saturn - Tethys',
   'General Sargas Ruk': 'Saturn - Tethys',
   'Alad V': 'Jupiter - Themisto',
-  'Mutalist Alad V': 'Eris - (llave Mutalist Alad V)',
+  'Mutalist Alad V': 'Eris - (Mutalist Alad V key)',
   Ambulas: 'Pluto - Hades',
   'Hyena Pack': 'Neptune - Psamathe',
   Raptor: 'Europa - Naamah',
   Lephantis: 'Deimos - Magnacidium',
-  Phorid: 'Invasión Infestada (varía)',
+  Phorid: 'Infested Invasion (varies)',
   'Jordas Golem': 'Eris - (The Jordas Verdict)',
   'Corrupted Vor': 'Void - Belenus / Mot',
 };
@@ -602,8 +602,8 @@ export function parseItemFromHtml(wikiPage, html, categories = []) {
   if (!hasBlueprintPart && crafting.has('Blueprint')) {
     const marketMatch = html.match(/Market Price[^<]*?([\d,]+)/i);
     acqParts.unshift({
-      name: 'Blueprint (principal)',
-      source: marketMatch ? `Mercado (${marketMatch[1]} Platinum)` : 'Mercado',
+      name: 'Blueprint (main)',
+      source: marketMatch ? `Market (${marketMatch[1]} Platinum)` : 'Market',
       relic: '',
       rarity: '',
       dropChance: '',
@@ -612,7 +612,7 @@ export function parseItemFromHtml(wikiPage, html, categories = []) {
 
   // Attach per-part materials + resolve boss nodes.
   const parts = acqParts.map((p) => {
-    const kw = /principal/i.test(p.name) ? 'Blueprint' : componentKeyword(p.name) || 'Blueprint';
+    const kw = /\(main\)/i.test(p.name) ? 'Blueprint' : componentKeyword(p.name) || 'Blueprint';
     const craft = crafting.get(kw);
     return {
       ...p,

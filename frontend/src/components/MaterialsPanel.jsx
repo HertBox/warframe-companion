@@ -30,14 +30,14 @@ export default function MaterialsPanel({ objectives, onClose }) {
   return (
     <div className="overlay">
       <div className="overlay__head">
-        <span className="overlay__title">Materiales totales</span>
+        <span className="overlay__title">Total materials</span>
         <button className="btn-sm" onClick={onClose}>
-          ✕ Cerrar
+          ✕ Close
         </button>
       </div>
       <div className="overlay__body">
         {grouped.length === 0 && (
-          <div className="empty">No hay materiales todavía.</div>
+          <div className="empty">No materials yet.</div>
         )}
         {grouped.map((mat) => (
           <div className="material" key={mat.name}>
@@ -53,7 +53,7 @@ export default function MaterialsPanel({ objectives, onClose }) {
                 mat.neededFor.length > 1 ? 'material__shared' : 'material__farm'
               }
             >
-              Necesario para: {mat.neededFor.join(', ')}
+              Needed for: {mat.neededFor.join(', ')}
             </span>
           </div>
         ))}

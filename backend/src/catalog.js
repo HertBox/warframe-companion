@@ -12,7 +12,7 @@ const BLOCKLIST = new Set([
 
 // Turn a raw category title into a clean entry, or null if it should be dropped.
 //   kind:    'warframe' | 'weapon'
-//   subtype: e.g. 'Primaria' (only meaningful for weapons)
+//   subtype: e.g. 'Primary' (only meaningful for weapons)
 function normalizeTitle(title, kind, subtype) {
   // Namespaced pages (Conclave:, User:, Category:, File:, …).
   if (title.includes(':')) return null;
@@ -66,9 +66,9 @@ export function buildCatalog(raw) {
   const warframes = cleanList(raw.warframes || [], 'warframe', '').sort(byName);
 
   const weapons = [
-    ...cleanList(raw.primary || [], 'weapon', 'Primaria'),
-    ...cleanList(raw.secondary || [], 'weapon', 'Secundaria'),
-    ...cleanList(raw.melee || [], 'weapon', 'Cuerpo a cuerpo'),
+    ...cleanList(raw.primary || [], 'weapon', 'Primary'),
+    ...cleanList(raw.secondary || [], 'weapon', 'Secondary'),
+    ...cleanList(raw.melee || [], 'weapon', 'Melee'),
   ];
   // Dedupe across weapon categories (a few pages are cross-listed).
   const seen = new Set();

@@ -20,7 +20,7 @@ export default function SummaryBar({ objectives }) {
           part.sourceNode ||
           part.source ||
           (part.relic ? part.relic.split(',')[0].trim() : '');
-        if (!key || /mercado/i.test(key)) continue;
+        if (!key || /market/i.test(key)) continue;
         const entry = counts.get(key) || { count: 0, label: key };
         entry.count += 1;
         counts.set(key, entry);
@@ -41,9 +41,9 @@ export default function SummaryBar({ objectives }) {
   return (
     <div className="summary">
       <div className="summary__row">
-        <span className="summary__label">Progreso total</span>
+        <span className="summary__label">Total progress</span>
         <span className="summary__value">
-          {obtained} / {total} partes
+          {obtained} / {total} parts
         </span>
       </div>
       <div className="progress__track">
@@ -51,10 +51,10 @@ export default function SummaryBar({ objectives }) {
       </div>
       {next && (
         <div className="summary__next">
-          <span>▶ Siguiente:</span>
+          <span>▶ Next:</span>
           <span className="summary__next-loc">{next.label}</span>
           <span className="summary__next-count">
-            ({next.count} {next.count === 1 ? 'parte' : 'partes'})
+            ({next.count} {next.count === 1 ? 'part' : 'parts'})
           </span>
         </div>
       )}

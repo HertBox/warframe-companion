@@ -1,9 +1,9 @@
 // Shared display metadata for objective types (icons + badge styling).
 export const TYPE_META = {
   warframe: { icon: '◈', label: 'Warframe', badge: 'warframe' },
-  prime_warframe: { icon: '◈', label: 'Warframe Prime', badge: 'prime' },
-  weapon: { icon: '⚔', label: 'Arma', badge: 'weapon' },
-  prime_weapon: { icon: '⚔', label: 'Arma Prime', badge: 'prime' },
+  prime_warframe: { icon: '◈', label: 'Prime Warframe', badge: 'prime' },
+  weapon: { icon: '⚔', label: 'Weapon', badge: 'weapon' },
+  prime_weapon: { icon: '⚔', label: 'Prime Weapon', badge: 'prime' },
   mod: { icon: '◆', label: 'Mod', badge: 'mod' },
   augment_mod: { icon: '◆', label: 'Augment', badge: 'mod' },
   primed_mod: { icon: '◆◆', label: 'Primed', badge: 'primed_mod' },

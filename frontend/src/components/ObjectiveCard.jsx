@@ -22,7 +22,7 @@ function PartRow({ objectiveId, part, onToggle }) {
       <div className="part">
         <button
           className={`checkbox ${part.obtained ? 'checkbox--on' : ''}`}
-          aria-label={`Marcar ${part.name}`}
+          aria-label={`Toggle ${part.name}`}
           onClick={() => onToggle(objectiveId, part.id, !part.obtained)}
         >
           {part.obtained ? '✓' : ''}
@@ -57,7 +57,7 @@ function PartRow({ objectiveId, part, onToggle }) {
             className="part__mats-toggle"
             onClick={() => setShowMats((s) => !s)}
           >
-            Materiales de esta parte ({mats.length}) {showMats ? '▲' : '▼'}
+            Materials for this part ({mats.length}) {showMats ? '▲' : '▼'}
           </button>
           {showMats && (
             <div className="part__mats">
@@ -129,7 +129,7 @@ export default function ObjectiveCard({
         <span className={`badge badge--${meta.badge}`}>{meta.label}</span>
         <button
           className="card__menu-btn"
-          aria-label="Opciones"
+          aria-label="Options"
           onClick={() => setConfirming((c) => !c)}
         >
           ⋮
@@ -139,7 +139,7 @@ export default function ObjectiveCard({
       {/* Inline confirm / menu row */}
       {confirming && (
         <div className="card__confirm">
-          <span className="card__confirm-label">¿Completado o eliminar?</span>
+          <span className="card__confirm-label">Complete or delete?</span>
           <button
             className="btn-sm btn-gold"
             onClick={() => {
@@ -156,7 +156,7 @@ export default function ObjectiveCard({
               onRemove?.(objective.id, 'completed');
             }}
           >
-            Completado ✓
+            Done ✓
           </button>
           <button
             className="btn-sm btn-danger"
@@ -165,7 +165,7 @@ export default function ObjectiveCard({
               onRemove?.(objective.id, 'deleted');
             }}
           >
-            Eliminar ✕
+            Delete ✕
           </button>
         </div>
       )}
@@ -189,7 +189,7 @@ export default function ObjectiveCard({
               <div className="progress__fill" style={{ width: `${progress}%` }} />
             </div>
             <span className="progress__label">
-              {obtainedCount} / {parts.length} partes
+              {obtainedCount} / {parts.length} parts
             </span>
           </div>
         </>
@@ -219,7 +219,7 @@ export default function ObjectiveCard({
           style={{ alignSelf: 'flex-start' }}
           onClick={() => onMarkObtained(objective.id, !objective.obtained)}
         >
-          {objective.obtained ? '✓ Obtenido' : 'Marcar como obtenido'}
+          {objective.obtained ? '✓ Obtained' : 'Mark as obtained'}
         </button>
       )}
 
@@ -230,7 +230,7 @@ export default function ObjectiveCard({
             className="materials__toggle"
             onClick={() => setShowMaterials((s) => !s)}
           >
-            Materiales totales ({materials.length}) {showMaterials ? '▲' : '▼'}
+            Total materials ({materials.length}) {showMaterials ? '▲' : '▼'}
           </button>
           {showMaterials && (
             <div className="materials__grid">
@@ -249,7 +249,7 @@ export default function ObjectiveCard({
                   )}
                   {mat.sharedWith && mat.sharedWith.length > 0 && (
                     <span className="material__shared">
-                      También en: {mat.sharedWith.join(', ')}
+                      Also in: {mat.sharedWith.join(', ')}
                     </span>
                   )}
                 </div>

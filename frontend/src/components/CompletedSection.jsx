@@ -10,7 +10,7 @@ export default function CompletedSection({ refreshKey, onReadd, onToast }) {
     try {
       setItems(await fetchCompleted());
     } catch (err) {
-      onToast?.(err.message || 'No se pudo cargar completados', 'error');
+      onToast?.(err.message || 'Could not load completed items', 'error');
     }
   }, [onToast]);
 
@@ -21,11 +21,11 @@ export default function CompletedSection({ refreshKey, onReadd, onToast }) {
   async function handleReadd(id) {
     try {
       const obj = await readdCompleted(id);
-      onToast?.(`${obj.name} re-agregado`, 'success');
+      onToast?.(`${obj.name} re-added`, 'success');
       setItems((prev) => prev.filter((i) => i.id !== id));
       onReadd?.(obj);
     } catch (err) {
-      onToast?.(err.message || 'No se pudo re-agregar', 'error');
+      onToast?.(err.message || 'Could not re-add', 'error');
     }
   }
 
@@ -34,7 +34,7 @@ export default function CompletedSection({ refreshKey, onReadd, onToast }) {
   return (
     <div>
       <button className="section-toggle" onClick={() => setOpen((o) => !o)}>
-        Completados ({items.length}) {open ? '▲' : '▼'}
+        Completed ({items.length}) {open ? '▲' : '▼'}
       </button>
       {open && (
         <div className="completed-list">
@@ -51,7 +51,7 @@ export default function CompletedSection({ refreshKey, onReadd, onToast }) {
                 className="btn-sm btn-teal"
                 onClick={() => handleReadd(item.id)}
               >
-                + Re-agregar
+                + Re-add
               </button>
             </div>
           ))}

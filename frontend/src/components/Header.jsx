@@ -7,7 +7,7 @@ export default function Header({ activeCount }) {
         <span className="header__icon">◎</span>
         <span className="header__title">Warframe Companion</span>
       </div>
-      <span className="header__count">{activeCount} activos</span>
+      <span className="header__count">{activeCount} active</span>
     </header>
   );
 }

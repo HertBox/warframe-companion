@@ -1,10 +1,10 @@
 import React from 'react';
 
 const FILTERS = [
-  { key: 'all', label: 'Todos' },
-  { key: 'primes', label: 'Primes' },
+  { key: 'all', label: 'All' },
+  { key: 'primes', label: 'Gear' },
   { key: 'mods', label: 'Mods' },
-  { key: 'resources', label: 'Recursos' },
+  { key: 'resources', label: 'Resources' },
 ];
 
 export default function FilterChips({ active, onChange }) {

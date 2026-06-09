@@ -18,7 +18,7 @@ export default function CatalogView({ existingPages = [], onAdd, onToast, onClos
     try {
       setCatalog(await fetchCatalog(force));
     } catch (err) {
-      onToast?.(err.message || 'No se pudo cargar el catálogo', 'error');
+      onToast?.(err.message || 'Could not load the catalog', 'error');
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -36,15 +36,15 @@ export default function CatalogView({ existingPages = [], onAdd, onToast, onClos
   const subFilters =
     tab === 'warframes'
       ? [
-          { key: 'all', label: 'Todos' },
-          { key: 'normal', label: 'Normales' },
+          { key: 'all', label: 'All' },
+          { key: 'normal', label: 'Normal' },
           { key: 'prime', label: 'Prime' },
         ]
       : [
-          { key: 'all', label: 'Todas' },
-          { key: 'Primaria', label: 'Primarias' },
-          { key: 'Secundaria', label: 'Secundarias' },
-          { key: 'Cuerpo a cuerpo', label: 'Melee' },
+          { key: 'all', label: 'All' },
+          { key: 'Primary', label: 'Primary' },
+          { key: 'Secondary', label: 'Secondary' },
+          { key: 'Melee', label: 'Melee' },
         ];
 
   const items = useMemo(() => {
@@ -67,15 +67,15 @@ export default function CatalogView({ existingPages = [], onAdd, onToast, onClos
     try {
       const created = await addObjective(entry.wikiPage, entry.name);
       if (created.parsingFailed) {
-        onToast?.('Sin datos estructurados — revisa la wiki', 'error');
+        onToast?.('No structured data — check the wiki', 'error');
       } else {
-        onToast?.(`${created.name} añadido`, 'success');
+        onToast?.(`${created.name} added`, 'success');
         setAddedPages((p) => [...p, entry.wikiPage]);
         onAdd?.(created);
       }
     } catch (err) {
-      if (err.status === 409) onToast?.('Ya en tu lista', 'error');
-      else onToast?.(err.message || 'No se pudo añadir', 'error');
+      if (err.status === 409) onToast?.('Already in your list', 'error');
+      else onToast?.(err.message || 'Could not add', 'error');
     } finally {
       setAdding(null);
     }
@@ -86,7 +86,7 @@ export default function CatalogView({ existingPages = [], onAdd, onToast, onClos
   return (
     <div className="overlay">
       <div className="overlay__head">
-        <span className="overlay__title">Catálogo</span>
+        <span className="overlay__title">Catalog</span>
         <div style={{ display: 'flex', gap: 8 }}>
           <button
             className="btn-sm btn-gold"
@@ -113,7 +113,7 @@ export default function CatalogView({ existingPages = [], onAdd, onToast, onClos
             className={`chip ${tab === 'weapons' ? 'chip--active' : ''}`}
             onClick={() => setTab('weapons')}
           >
-            Armas {catalog ? `(${catalog.weapons.length})` : ''}
+            Weapons {catalog ? `(${catalog.weapons.length})` : ''}
           </button>
         </div>
 
@@ -131,16 +131,16 @@ export default function CatalogView({ existingPages = [], onAdd, onToast, onClos
 
         <input
           className="search__input"
-          placeholder="Filtrar por nombre…"
+          placeholder="Filter by name…"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
 
       <div className="overlay__body catalog__list">
-        {loading && <div className="search__hint">Cargando catálogo…</div>}
+        {loading && <div className="search__hint">Loading catalog…</div>}
         {!loading && items.length === 0 && (
-          <div className="empty">Nada coincide con el filtro.</div>
+          <div className="empty">Nothing matches the filter.</div>
         )}
         {!loading &&
           items.map((entry) => {
@@ -169,14 +169,14 @@ export default function CatalogView({ existingPages = [], onAdd, onToast, onClos
                   </span>
                 </div>
                 {added ? (
-                  <span className="badge badge--mod">En lista</span>
+                  <span className="badge badge--mod">In list</span>
                 ) : (
                   <button
                     className="btn-sm btn-gold"
                     disabled={adding === entry.wikiPage}
                     onClick={() => handleAdd(entry)}
                   >
-                    {adding === entry.wikiPage ? '…' : '+ Añadir'}
+                    {adding === entry.wikiPage ? '…' : '+ Add'}
                   </button>
                 )}
               </div>
