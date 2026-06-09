@@ -1,0 +1,20 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Persisted data (JSON store) + catalog cache
+backend/data/*.json
+backend/data/catalog.json
+
+# Build output
+frontend/dist/
+**/dist/
+
+# Logs / env
+*.log
+.env
+.env.local
+
+# Editor / OS
+.DS_Store
+.vscode/

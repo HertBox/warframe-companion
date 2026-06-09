@@ -1,0 +1,16 @@
+{
+  "name": "warframe-companion-backend",
+  "version": "1.0.0",
+  "description": "Backend for Warframe Companion - proxies wiki API and owns JSON persistence",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "node-fetch": "^3.3.2"
+  }
+}

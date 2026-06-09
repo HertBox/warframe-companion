@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "3001:3001"
+    environment:
+      PORT: 3001
+      DATA_DIR: /app/data
+      WIKI_BASE: https://wiki.warframe.com/api.php
+    volumes:
+      - ./backend/data:/app/data
+      - ./backend/src:/app/src
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    # No VITE_API_URL: the frontend derives the backend host from the URL you
+    # open it with, so http://<LAN-IP>:3000 talks to http://<LAN-IP>:3001
+    # automatically. Set VITE_API_URL only if the backend runs elsewhere.
+    depends_on:
+      - backend
+    restart: unless-stopped
